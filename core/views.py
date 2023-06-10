@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from item.models import Category,Item
 from .forms import SignUpForm
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -29,3 +31,9 @@ def singup(request):
     return render (request,'core/signup.html',{
         'form':form
     })
+
+@login_required
+def signout(request):
+    logout(request)
+    return redirect('core:index')
+    
